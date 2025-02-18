@@ -13,9 +13,9 @@
               <div class="text-center">
                 <h3 id="hs-modal-signin-label" class="block text-2xl font-bold text-gray-800 dark:text-neutral-200">Sign in</h3>
                     Don't have an account yet?
-                    <button type="button" class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500">
+                    <a type="button" href="{{ url('/register') }}" class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500">
                         Sign up here
-                    </button>
+                    </a>
               </div>
 
               <div class="mt-5">
@@ -47,7 +47,7 @@
                     <div>
                       <div class="flex justify-between items-center">
                         <label for="password" class="block text-sm mb-2 dark:text-white">Password</label>
-                        <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="../examples/html/modal-recover-account.html">Forgot password?</a>
+                        {{-- <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="../examples/html/modal-recover-account.html">Forgot password?</a> --}}
                       </div>
                       <div class="relative">
                         <input type="password" wire:model='password' id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required aria-describedby="password-error">
@@ -61,15 +61,15 @@
                     </div>
                     <!-- End Form Group -->
 
-                    <!-- Checkbox -->
-                    <div class="flex items-center">
+                    <!-- Checkbox | Remember Me -->
+                    {{-- <div class="flex items-center">
                       <div class="flex">
                         <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-800 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                       </div>
                       <div class="ms-3">
                         <label for="remember-me" class="text-sm dark:text-white">Remember me</label>
                       </div>
-                    </div>
+                    </div> --}}
                     <!-- End Checkbox -->
 
                     <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Sign in</button>

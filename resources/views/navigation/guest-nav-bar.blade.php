@@ -4,14 +4,13 @@
     <nav class="relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto">
       <div class="lg:col-span-3 flex items-center">
         <!-- Logo -->
-        <a href="#" aria-label="Company" title="Company" class="inline-flex items-center">
+        <a href="/" aria-label="Company" title="Company" class="inline-flex items-center">
           <img class="h-8 w-auto" src="{{ url('hotel.png') }}" alt="Company">
         </a>
       </div>
 
       <!-- Button Group -->
       <div class="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
-        
 
         <livewire:components.modal.login-modal />
 
