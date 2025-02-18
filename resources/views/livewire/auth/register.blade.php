@@ -1,5 +1,10 @@
 <div>
+
+
     <div class="flex items-center justify-center min-h-screen bg-gray-300 dark:bg-neutral-900 px-6">
+
+        <livewire:components.alert.success-alert />
+
         <div
             class="w-full max-w-md mb-auto mt-6 bg-blue-200 border border-gray-400 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
             <div class="p-6 sm:p-7">

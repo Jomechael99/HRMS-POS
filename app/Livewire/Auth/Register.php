@@ -4,6 +4,8 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
+
 
 class Register extends Component
 {
@@ -44,13 +46,16 @@ class Register extends Component
                 'email'=> $this->email,
                 'username'=> $this->username,
                 'password'=> bcrypt($this->password)
-            ]);
+            ])->assignRole('guest');
 
-            session()->flash('success', 'Account successfully created');
+            $this->emit('showAlert', 'Account Successfully Created', 'success');
+
+            Log::info("Account Successfully Created");
 
             return $this->redirect('/');
 
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
 
