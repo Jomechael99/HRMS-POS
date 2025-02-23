@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@preline/overlay": "^2.5.2",
-        "preline": "^2.7.0"
+        "preline": "^2.7.0",
+        "toastr": "^2.1.4"
     }
 }

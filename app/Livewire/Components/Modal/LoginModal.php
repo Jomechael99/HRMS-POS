@@ -3,6 +3,8 @@
 namespace App\Livewire\Components\Modal;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginModal extends Component
 {
@@ -12,13 +14,33 @@ class LoginModal extends Component
 
     protected $rules = [
         "email"=> "required|email",
-        "password"=> "required|min:6"
+        "password"=> "required"
     ];
 
     public function signin() {
 
-        $this->validate();
-        session()->flash('error', 'Invalid credentials');
+
+        try {
+            $this->validate();
+
+            $credentials = [
+                'email' => $this->email,
+                'password'=> $this->password
+            ];
+
+            if (Auth::attempt($credentials)) {
+                session()->regenerate();
+                return redirect('/');
+            } else {
+                $this->addError('info', 'Invalid credentials');
+            }
+
+        } catch (\Exception $e) {
+
+        }
+
+
+
     }
 
     public function render()

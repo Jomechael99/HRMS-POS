@@ -24,13 +24,13 @@
                 <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-800 dark:after:border-neutral-800">Or</div>
 
                 <!-- Form -->
-                <form wire:submit.prevent="signin" class="mt-5">
+                <form wire:submit.prevent="signin" class="mt-5" onsubmit="checkForErrors(event)">
                   <div class="grid gap-y-4">
                     <!-- Form Group -->
                     <div>
                       <label for="email" class="block text-sm mb-2 dark:text-white">Email address</label>
                       <div class="relative">
-                        <input type="email" wire:model='email' id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required aria-describedby="email-error">
+                        <input type="email" wire:model='email' id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" aria-describedby="email-error">
                         <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                           <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
@@ -50,7 +50,7 @@
                         {{-- <a class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="../examples/html/modal-recover-account.html">Forgot password?</a> --}}
                       </div>
                       <div class="relative">
-                        <input type="password" wire:model='password' id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required aria-describedby="password-error">
+                        <input type="password" wire:model='password' id="password" name="password" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" aria-describedby="password-error">
                         <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                           <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
@@ -72,8 +72,13 @@
                     </div> --}}
                     <!-- End Checkbox -->
 
+                    @error('info')
+                        <p class="hidden text-xs text-red-600 mt-2" id="email-error">{{ $message }}</p>
+                    @enderror
+
                     <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Sign in</button>
-                  </div>
+
+                </div>
                 </form>
                 <!-- End Form -->
               </div>
@@ -84,25 +89,33 @@
 </div>
 
 <script>
+   function checkForErrors(event) {
+       if (document.querySelector(".text-red-600:not(.hidden)")) {
+           event.preventDefault(); // Prevent form submission if there are errors
+       }
+   }
+
    document.addEventListener("click", function (event) {
     const modal = document.getElementById("hs-modal-signin");
     const modalContent = modal.querySelector(".bg-white"); // Modal inner content
-    const modalTrigger = document.querySelector("[data-hs-overlay='#hs-modal-signin']"); // Button that opens the modal
 
+    // Prevent closing if the click is inside the modal
     if (modal.classList.contains("open") && modal.classList.contains("opened")) {
         if (!modalContent.contains(event.target)) {
-            // Use Preline's method to close the modal properly
+            // Check if there are validation errors before closing
+            if (document.querySelector(".text-red-600:not(.hidden)")) {
+                return; // Stop modal from closing if there are errors
+            }
+
             modal.setAttribute("aria-hidden", "true");
             modal.removeAttribute("aria-modal");
             modal.classList.remove("open", "opened");
             modal.classList.add("hidden");
-
-            // Reset tabindex to prevent double-click issue
             modal.setAttribute("tabindex", "-1");
 
-            // Also remove the backdrop if needed
             document.querySelector(".hs-overlay-backdrop")?.remove();
         }
     }
 });
+
 </script>

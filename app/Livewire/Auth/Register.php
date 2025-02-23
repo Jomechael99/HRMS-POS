@@ -5,7 +5,7 @@ namespace App\Livewire\Auth;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
-
+use Masmerise\Toaster\Toaster;
 
 class Register extends Component
 {
@@ -36,9 +36,10 @@ class Register extends Component
 
     public function register() {
 
-        try {
 
-            $this->validate();
+        $this->validate();
+
+        try {
 
             User::create([
                 'first_name'=> $this->first_name,
@@ -48,13 +49,18 @@ class Register extends Component
                 'password'=> bcrypt($this->password)
             ])->assignRole('guest');
 
-            $this->emit('showAlert', 'Account Successfully Created', 'success');
-
             Log::info("Account Successfully Created");
 
-            return $this->redirect('/');
+            Toaster::success("Account Successfully Created");
+
+            $this->js("
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000); // 2-second delay to show the toaster
+            ");
 
         } catch (\Exception $e) {
+            Toaster::error("Account Creation Failed");
             Log::error($e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }

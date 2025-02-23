@@ -2,16 +2,19 @@
 
 
     <div class="flex items-center justify-center min-h-screen bg-gray-300 dark:bg-neutral-900 px-6">
-
-        <livewire:components.alert.success-alert />
-
         <div
             class="w-full max-w-md mb-auto mt-6 bg-blue-200 border border-gray-400 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
             <div class="p-6 sm:p-7">
                 <div class="text-center">
-                    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Sign up</h1>
+                    <h3 id="hs-modal-signin-label" class="block text-2xl font-bold text-gray-800 dark:text-neutral-200">Sign Up</h3>
+                        Do you have an account ?
+                        <a type="button" href="{{ url('/login') }}" class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500">
+                            Sign in here
+                        </a>
                 </div>
-                <div class="mt-5">
+                    <div class="mt-5">
+                        <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-800 dark:after:border-neutral-800">Or</div>
+
                     <form wire:submit.prevent="register">
                         <div class="grid gap-y-4">
 
@@ -87,6 +90,7 @@
                                 up</button>
                         </div>
                     </form>
+                </div>
                 </div>
             </div>
         </div>
