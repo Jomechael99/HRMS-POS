@@ -12,7 +12,17 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/admin', App\Livewire\Admin\Homepage::class);
+        Route::prefix('/admin')->name('')->group(function () {
+            Route::get('/', App\Livewire\Admin\Homepage::class);
+
+
+            Route::prefix('/room')->name('')->group(function () {
+                Route::get('/', App\Livewire\Admin\Room\Index::class);
+            });
+
+        });
+
+
     });
 });
 
