@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('room_id')->constrained('rooms');
             $table->string('name');
             $table->string('description');
+            $table->double('price', 2);
             $table->timestamps();
             $table->softDeletes();
         });

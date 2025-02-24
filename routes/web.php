@@ -17,7 +17,8 @@ Route::middleware('auth')->group(function () {
 
 
             Route::prefix('/room')->name('')->group(function () {
-                Route::get('/', App\Livewire\Admin\Room\Index::class);
+                Route::get('/', App\Livewire\Admin\Room\Index::class)->name('room.index');
+                Route::get('/create', App\Livewire\Admin\Room\Create::class)->name('room.create');
             });
 
         });
