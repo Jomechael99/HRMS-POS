@@ -14,6 +14,7 @@ class RoomType extends Model
         'room_id',
         'name',
         'description',
+        'price'
     ];
 
     public function room(): BelongsTo

@@ -37,6 +37,24 @@
 
                     <div class="sm:col-span-3">
                         <label class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                            Room
+                        </label>
+                    </div>
+
+                    <div class="sm:col-span-9">
+                        <select wire:model="selectedOption" class="py-2 px-3 block w-full border-2 @error('selectedOption') border-red-600 @else border-black @enderror shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600">
+                            <option value="">Select an option</option>
+                            @foreach($options as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                        @error('selectedOption')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             Name
                         </label>
                     </div>
@@ -46,7 +64,7 @@
                         <input type="text" wire:model="name"
                                class="py-2 px-3 pe-11 block w-full border-2 @error('name') border-red-600 @else border-black @enderror shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                         @error('name')
-                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
                     <!-- End Col -->
@@ -61,7 +79,22 @@
                     <div class="sm:col-span-9">
                         <input type="text" wire:model="description" class="py-2 px-3 pe-11 block w-full border-2 border-black shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                         @error('message')
-                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                            Price
+                        </label>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9">
+                        <input type="'number'" wire:model="price"
+                               class="py-2 px-3 pe-11 block w-full border-2 @error('name') border-red-600 @else border-black @enderror shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        @error('price')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
