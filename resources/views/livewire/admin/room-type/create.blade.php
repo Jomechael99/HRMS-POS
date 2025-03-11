@@ -4,10 +4,10 @@
         <div class="border-2 border-gray-600 rounded-xl shadow-xl p-4 sm:p-7 dark:bg-neutral-800">
             <div class="mb-8">
                 <h2 class="text-xl text-center font-bold text-gray-800 dark:text-neutral-200">
-                    Room
+                    Room Type
                 </h2>
                 <p class="text-sm text-center text-gray-600 dark:text-neutral-400">
-                    Add Room
+                    Add Room Type
                 </p>
             </div>
 
@@ -91,7 +91,7 @@
                     <!-- End Col -->
 
                     <div class="sm:col-span-9">
-                        <input type="'number'" wire:model="price"
+                        <input type="number" wire:model="price"
                                class="py-2 px-3 pe-11 block w-full border-2 @error('name') border-red-600 @else border-black @enderror shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                         @error('price')
                         <span class="text-red-500 text-xs">{{ $message }}</span>

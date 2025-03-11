@@ -15,16 +15,17 @@ class Index extends Component
     use WithPagination;
 
     public function delete($id) {
+
         $room = Room::findOrFail($id);
         $room->delete();
 
-        session()->flash('message', 'Room Delete successfully');
-        Toaster::success("Room Delete Success");
+        session()->flash('message', 'Room Type Delete successfully');
+        Toaster::success("Room Type Delete Success");
         Log::info("Room Deleted");
 
         $this->js("
                     setTimeout(() => {
-                        window.location.href = '/admin/room';
+                        window.location.href = '/admin/roomtype';
                     }, 1000); // 1-second delay to show the toaster
                 ");
     }

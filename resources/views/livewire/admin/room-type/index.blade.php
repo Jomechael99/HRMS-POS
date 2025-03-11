@@ -57,6 +57,9 @@
                                         ID
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
+                                        Room Name
+                                    </th>
+                                    <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
                                         Name
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
@@ -72,18 +75,19 @@
                                 </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700 text-center">
-                                @foreach($data as $room)
+                                @foreach($data as $row)
                                     <tr>
-                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->id }}</td>
-                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->name }}</td>
-                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->description }}</td>
-                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ number_format($room->price, 2) }}</td>
-                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->created_at }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->id }}
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->room->name }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->name }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->description }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ number_format($row->price, 2) }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->created_at }}</td>
                                         <td class="px-1 py-3 text-center ">
-                                            <a type="button" href="{{ route('roomtype.edit', $room->id) }}" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                            <a type="button" href="{{ route('roomtype.edit', $row->id) }}" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                                 Edit
                                             </a>
-                                            <button type="button" wire:click="delete({{ $room->id }})" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                            <button type="button" wire:click="delete({{ $row->id }})" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                                 Delete
                                             </button>
                                         </td>

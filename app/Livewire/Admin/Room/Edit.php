@@ -30,8 +30,8 @@ class Edit extends Component
     {
         $this->validate();
 
-        $post = Room::findOrFail($this->id);
-        $post->update([
+        $data = Room::findOrFail($this->id);
+        $data->update([
             'name' => $this->name,
             'description' => $this->description,
         ]);

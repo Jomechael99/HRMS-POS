@@ -2,15 +2,37 @@
 
 namespace App\Livewire\Admin\RoomType;
 
+use App\Models\Room;
 use App\Models\RoomType;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Masmerise\Toaster\Toaster;
 
 class Index extends Component
 {
+
+    use WithPagination;
+
+    public function delete($id) {
+        $room = Room::findOrFail($id);
+        $room->delete();
+
+        session()->flash('message', 'Room Delete successfully');
+        Toaster::success("Room Delete Success");
+        Log::info("Room Deleted");
+
+        $this->js("
+                    setTimeout(() => {
+                        window.location.href = '/admin/room';
+                    }, 1000); // 1-second delay to show the toaster
+                ");
+    }
+
     public function render()
     {
 
-        $data = RoomType::latest()->paginate(10);
+        $data = RoomType::with('room')->latest()->paginate(10);
 
         return view('livewire.admin.room-type.index', [
             'data' => $data
