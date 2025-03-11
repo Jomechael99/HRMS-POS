@@ -63,6 +63,9 @@
                                         Name
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
+                                        Photo
+                                    </th>
+                                    <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
                                         Description
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
@@ -77,11 +80,17 @@
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700 text-center">
                                 @foreach($data as $row)
                                     <tr>
+
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->id }}
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->room->name }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->name }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">
+                                            @if($row->getFirstMediaUrl('images'))
+                                                <img src="{{ asset('storage/' . $row->getFirstMedia('images')->id . '/' . $row->getFirstMedia('images')->file_name) }}" alt="Product Image">
+                                            @endif
+                                        </td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->description }}</td>
-                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ number_format($row->price, 2) }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">PHP {{ number_format($row->price, 2) }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->created_at }}</td>
                                         <td class="px-1 py-3 text-center ">
                                             <a type="button" href="{{ route('roomtype.edit', $row->id) }}" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">

@@ -6,33 +6,42 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Masmerise\Toaster\Toaster;
 
 class Create extends Component
 {
+
+    use WithFileUploads;
 
     public $selectedOption = '';
     public $options = [];
     public $name = '';
     public $description = '';
     public $price = '';
+    public $roomType;
+    public $media;
 
     protected $rules = [
         'selectedOption' => 'required',
         'name'=>'required',
-        'price' => 'required'
+        'price' => 'required',
     ];
 
     public function create() {
 
         $this->validate();
 
-        RoomType::create([
+        $data = RoomType::create([
             'room_id' => $this->selectedOption,
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price
         ]);
+
+        $data->addMedia($this->media->getRealPath())
+            ->toMediaCollection('images');
+
 
         session()->flash('message', 'Room created successfully');
         Toaster::success("Room Creation Success");

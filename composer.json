@@ -12,6 +12,7 @@
         "livewire/livewire": "^3.5",
         "masmerise/livewire-toaster": "^2.6",
         "opcodesio/log-viewer": "^3.14",
+        "spatie/image": "^3.8",
         "spatie/laravel-activitylog": "^4.10",
         "spatie/laravel-medialibrary": "^11.12",
         "spatie/laravel-permission": "^6.15"

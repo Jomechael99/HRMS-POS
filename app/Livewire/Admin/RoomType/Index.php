@@ -15,16 +15,16 @@ class Index extends Component
     use WithPagination;
 
     public function delete($id) {
-        $room = Room::findOrFail($id);
+        $room = RoomType::findOrFail($id);
         $room->delete();
 
-        session()->flash('message', 'Room Delete successfully');
-        Toaster::success("Room Delete Success");
-        Log::info("Room Deleted");
+        session()->flash('message', 'Room Type Delete successfully');
+        Toaster::success("Room Type Delete Success");
+        Log::info("Room Type Deleted");
 
         $this->js("
                     setTimeout(() => {
-                        window.location.href = '/admin/room';
+                        window.location.href = '/admin/roomtype';
                     }, 1000); // 1-second delay to show the toaster
                 ");
     }
@@ -32,7 +32,7 @@ class Index extends Component
     public function render()
     {
 
-        $data = RoomType::with('room')->latest()->paginate(10);
+        $data = RoomType::with(['room', 'media'])->latest()->paginate(10);
 
         return view('livewire.admin.room-type.index', [
             'data' => $data
