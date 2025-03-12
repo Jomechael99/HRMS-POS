@@ -1,9 +1,18 @@
 <?php
 
+use App\Livewire\Guest\AboutUs;
+use App\Livewire\Guest\OurRooms;
+use App\Livewire\Guest\OurServices;
+use App\Livewire\Guest\Reservations;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', App\Livewire\Guest\Homepage::class);
+
+Route::get('/about-us', AboutUs::class)->name('about-us');
+Route::get('/our-rooms', OurRooms::class)->name('our-rooms');
+Route::get('/our-services', OurServices::class)->name('our-services');
+Route::get('/reservations', Reservations::class)->name('reservations');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', App\Livewire\Auth\Login::class);
@@ -15,6 +24,11 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/admin')->name('')->group(function () {
             Route::get('/', App\Livewire\Admin\Homepage::class);
 
+            Route::prefix('/user')->name('')->group(function () {
+                Route::get('/', App\Livewire\Admin\User\Index::class)->name('user.index');
+                Route::get('/create', App\Livewire\Admin\User\Create::class)->name('user.create');
+                Route::get('/edit/{id}', App\Livewire\Admin\User\Edit::class)->name('user.edit');
+            });
 
             Route::prefix('/room')->name('')->group(function () {
                 Route::get('/', App\Livewire\Admin\Room\Index::class)->name('room.index');
