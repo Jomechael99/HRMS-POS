@@ -86,7 +86,9 @@
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->name }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">
                                             @if($row->getFirstMediaUrl('images'))
-                                                <img src="{{ asset('storage/' . $row->getFirstMedia('images')->id . '/' . $row->getFirstMedia('images')->file_name) }}" alt="Product Image">
+                                                <img class="mx-auto" src="{{ asset('storage/' . $row->getFirstMedia('images')->id . '/' . $row->getFirstMedia('images')->file_name) }}" alt="Product Image" width="50" height="50">
+                                            @else
+                                                <img class="mx-auto" src="{{ asset('images/no-picture-available.png') }}" alt="No Picture Available" width="100" height="100">
                                             @endif
                                         </td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $row->description }}</td>

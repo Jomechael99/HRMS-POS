@@ -28,6 +28,12 @@ Route::middleware('auth')->group(function () {
                 Route::get('/edit/{id}', App\Livewire\Admin\RoomType\Edit::class)->name('roomtype.edit');
             });
 
+            Route::prefix('/services')->name('')->group(function () {
+                Route::get('/', App\Livewire\Admin\Services\Index::class)->name('services.index');
+                Route::get('/create', App\Livewire\Admin\Services\Create::class)->name('services.create');
+                Route::get('/edit/{id}', App\Livewire\Admin\Services\Edit::class)->name('services.edit');
+            });
+
         });
 
 
