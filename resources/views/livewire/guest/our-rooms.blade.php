@@ -18,19 +18,20 @@
                 <div class="hs-carousel-body absolute top-0 bottom-0 left-0 flex flex-nowrap transition-transform duration-700 opacity-100">
 
                     <!-- Slide 1 -->
-                    <div class="hs-carousel-slide w-full flex items-center justify-center bg-gray-100 p-10 dark:bg-neutral-900">
-                        <span class="text-4xl font-bold text-gray-800 dark:text-white">Luxury Suite</span>
-                    </div>
-
+                    @foreach($rooms as $data)
+                        <div class="hs-carousel-slide w-full flex items-center justify-center bg-gray-100 p-10 dark:bg-neutral-900 relative">
+                            @if($data->getFirstMediaUrl('images'))
+                                <img class="absolute inset-0 w-full h-full object-fill"
+                                     src="{{ asset('storage/' . $data->getFirstMedia('images')->id . '/' . $data->getFirstMedia('images')->file_name) }}"
+                                     alt="Product Image">
+                                <span class="relative z-10 text-4xl font-bold text-black dark:text-white">{{ $data->name }}</span>
+                            @else
+                                <img class="absolute inset-0 w-full h-full object-fill" src="{{ url('no-image.jpg') }}" alt="No Picture Available">
+                                <span class="relative z-10 text-4xl font-bold text-black dark:text-white">{{ $data->name }}</span>
+                            @endif
+                        </div>
+                    @endforeach
                     <!-- Slide 2 -->
-                    <div class="hs-carousel-slide w-full flex items-center justify-center bg-gray-200 p-10 dark:bg-neutral-800">
-                        <span class="text-4xl font-bold text-gray-800 dark:text-white">Deluxe Room</span>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div class="hs-carousel-slide w-full flex items-center justify-center bg-gray-300 p-10 dark:bg-neutral-700">
-                        <span class="text-4xl font-bold text-gray-800 dark:text-white">Family Room</span>
-                    </div>
                 </div>
             </div>
 
@@ -58,28 +59,14 @@
     <!-- Room Details Section -->
     <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-16">
         <!-- Room Card -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="p-6">
-                <h2 class="text-2xl font-semibold text-gray-800">Deluxe Room</h2>
-                <p class="text-gray-600 mt-2">A luxurious stay with a modern design, ocean views, and premium amenities.</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Book Now</button>
+        @foreach($rooms as $data)
+            <div class="bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">{{ $data->name }}</h2>
+                    <p class="text-gray-600 mt-2">{{ $data->description }}</p>
+                    <a href="#" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Book Now</a>
+                </div>
             </div>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="p-6">
-                <h2 class="text-2xl font-semibold text-gray-800">Executive Suite</h2>
-                <p class="text-gray-600 mt-2">A spacious suite with high-end furnishings and an elegant ambiance.</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Book Now</button>
-            </div>
-        </div>
-
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="p-6">
-                <h2 class="text-2xl font-semibold text-gray-800">Family Room</h2>
-                <p class="text-gray-600 mt-2">A comfortable space designed for families, featuring cozy interiors and kid-friendly services.</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Book Now</button>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
