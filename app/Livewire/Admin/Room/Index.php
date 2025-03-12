@@ -33,7 +33,7 @@ class Index extends Component
     public function render()
     {
 
-        $data = Room::latest()->paginate(10);
+        $data = Room::with('media')->latest()->paginate(10);
 
         return view('livewire.admin.room.index', [
             'data' => $data

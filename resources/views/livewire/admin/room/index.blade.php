@@ -57,10 +57,19 @@
                                         ID
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
+                                        Room Photo
+                                    </th>
+                                    <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
                                         Name
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
                                         Description
+                                    </th>
+                                    <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
+                                        Price
+                                    </th>
+                                    <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
+                                        Is Featured ?
                                     </th>
                                     <th class="w-1/5 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200 text-center">
                                         Created
@@ -72,8 +81,17 @@
                                 @foreach($data as $room)
                                     <tr>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->id }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">
+                                            @if($room->getFirstMediaUrl('images'))
+                                                <img class="mx-auto" src="{{ asset('storage/' . $room->getFirstMedia('images')->id . '/' . $room->getFirstMedia('images')->file_name) }}" alt="Product Image" width="100" height="50">
+                                            @else
+                                                <img class="mx-auto" src="{{ asset('images/no-picture-available.png') }}" alt="No Picture Available" width="100" height="100">
+                                            @endif
+                                        </td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->name }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->description }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ number_format($room->price,2) }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->is_featured ? "Yes" : "No" }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $room->created_at }}</td>
                                         <td class="px-1 py-3 text-center ">
                                             <a type="button" href="{{ route('room.edit', $room->id) }}" class="py-2 px-3 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
