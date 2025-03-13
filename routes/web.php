@@ -14,9 +14,15 @@ Route::get('/our-rooms', OurRooms::class)->name('our-rooms');
 Route::get('/our-services', OurServices::class)->name('our-services');
 Route::get('/reservations', Reservations::class)->name('reservations');
 
+Route::prefix('/reservations')->name('reservation.')->group(function () {
+    Route::get('/list', App\Livewire\Reservation\Index::class)->name('list');
+    Route::get('/create', App\Livewire\Reservation\Create::class)->name('create');
+});
+
+
 Route::middleware('guest')->group(function () {
-    Route::get('/login', App\Livewire\Auth\Login::class);
-    Route::get('/register', App\Livewire\Auth\Register::class);
+    Route::get('/login', App\Livewire\Auth\Login::class)->name('login');
+    Route::get('/register', App\Livewire\Auth\Register::class)->name('register');
 });
 
 Route::middleware('auth')->group(function () {

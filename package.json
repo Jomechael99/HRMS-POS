@@ -20,7 +20,11 @@
     "dependencies": {
         "@preline/carousel": "^3.0.0",
         "@preline/overlay": "^2.5.2",
+        "flatpickr": "^4.6.13",
+        "litepicker": "^2.0.12",
         "preline": "^2.7.0",
-        "toastr": "^2.1.4"
+        "select2": "^4.1.0-rc.0",
+        "toastr": "^2.1.4",
+        "tom-select": "^2.4.3"
     }
 }

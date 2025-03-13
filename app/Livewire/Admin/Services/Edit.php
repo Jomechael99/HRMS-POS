@@ -23,7 +23,6 @@ class Edit extends Component
     protected $rules = [
         'name'=>'required',
         'price' => 'required',
-        'media' => 'required|image|max:1024',
     ];
 
     public function mount($id) {

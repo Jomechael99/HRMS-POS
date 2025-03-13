@@ -21,7 +21,6 @@ class Create extends Component
     protected $rules = [
         'name' => 'required',
         'price' => 'required',
-        'media' => 'required|image|max:1024',
     ];
 
     public function create() {
@@ -34,9 +33,10 @@ class Create extends Component
             'price' => $this->price
         ]);
 
-        $data->addMedia($this->media->getRealPath())
-            ->toMediaCollection('images');
-
+        if ($this->media) {
+            $data->addMedia($this->media->getRealPath())
+                ->toMediaCollection('images');
+        }
 
         session()->flash('message', 'Room created successfully');
         Toaster::success("Room Creation Success");

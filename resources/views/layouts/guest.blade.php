@@ -7,6 +7,9 @@
         <title>{{ $title ?? 'HRMS-POS' }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css">
+        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
         @livewireStyles()
 
     </head>
@@ -14,6 +17,7 @@
         <livewire:navigation.guest-nav-bar/>
         {{ $slot }}
         <x-toaster-hub />
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         @livewireScripts()
     </body>
 </html>
